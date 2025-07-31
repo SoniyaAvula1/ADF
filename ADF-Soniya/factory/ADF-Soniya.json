@@ -1,0 +1,9 @@
+{
+	"name": "ADF-Soniya",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "32aa9095-755b-47ec-8a22-60dbd27dedc7",
+		"tenantId": "039a4137-5961-45b9-85dc-a374673d934e"
+	}
+}

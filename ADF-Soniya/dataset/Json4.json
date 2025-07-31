@@ -1,0 +1,40 @@
+{
+	"name": "Json4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LNK_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "simple-object.json",
+				"folderPath": "Json",
+				"fileSystem": "soniya-dev-container"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"_credit": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"age": {
+					"type": "integer"
+				},
+				"email": {
+					"type": "string"
+				},
+				"isActive": {
+					"type": "boolean"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

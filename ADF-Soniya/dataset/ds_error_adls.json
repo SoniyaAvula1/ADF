@@ -1,0 +1,33 @@
+{
+	"name": "ds_error_adls",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LNK_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"y": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().y",
+					"type": "Expression"
+				},
+				"folderPath": "csv/error",
+				"fileSystem": "soniya-dev-container"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

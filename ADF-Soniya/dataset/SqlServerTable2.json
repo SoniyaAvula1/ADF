@@ -1,0 +1,31 @@
+{
+	"name": "SqlServerTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Onprem_Adventureworks",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"X": {
+				"type": "string"
+			},
+			"Y": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().X",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().Y",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

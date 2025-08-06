@@ -1,0 +1,9 @@
+{
+	"name": "Soniya2",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bddc34a4-2c89-4812-89fb-c9e90770ee18",
+		"tenantId": "3a303c58-c919-4dd0-b7f6-c5f7df121258"
+	}
+}

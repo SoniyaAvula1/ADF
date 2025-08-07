@@ -1857,7 +1857,14 @@
 					{
 						"name": "Get Metadata1",
 						"type": "GetMetadata",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Script1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -2055,6 +2062,55 @@
 							"referenceName": "LNK_AZURE_SQL1",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Script1",
+						"description": "",
+						"type": "Script",
+						"dependsOn": [
+							{
+								"activity": "Validation1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"linkedServiceName": {
+							"referenceName": "LNK_AZURE_SQL1",
+							"type": "LinkedServiceReference"
+						},
+						"typeProperties": {
+							"scripts": [
+								{
+									"type": "Query",
+									"text": "TRUNCATE TABLE summary\nTRUNCATE TABLE daily_recon\nTRUNCATE TABLE [dbo].[pipeline_log]\n\ntruncate table Purchasing_PurchaseOrderDetail\ntruncate table Purchasing_PurchaseOrderHeader"
+								}
+							],
+							"scriptBlockExecutionTimeout": "02:00:00"
+						}
+					},
+					{
+						"name": "Validation1",
+						"type": "Validation",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DelimitedText18",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"timeout": "0.12:00:00",
+							"sleep": 10
+						}
 					}
 				],
 				"policy": {
@@ -2065,6 +2121,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SRC_RECON')]",
 				"[concat(variables('factoryId'), '/linkedServices/LNK_AZURE_SQL1')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText18')]",
 				"[concat(variables('factoryId'), '/datasets/SRC_COPY_RECON')]",
 				"[concat(variables('factoryId'), '/datasets/Sink_AZURE_RECON')]",
 				"[concat(variables('factoryId'), '/datasets/Audit_src')]",
@@ -2992,6 +3049,44 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/LNK_ADLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText18')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LNK_ADLS2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Summary.csv",
+						"folderPath": "RECON",
+						"fileSystem": "soniya2"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "filename",
+						"type": "String"
+					},
+					{
+						"name": "filecount",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LNK_ADLS2')]"
 			]
 		},
 		{

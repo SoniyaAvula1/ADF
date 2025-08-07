@@ -1,0 +1,23 @@
+{
+	"name": "SRC_RECON",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LNK_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "RECON",
+				"fileSystem": "soniya2"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "Audit_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LNK_AZURE_SQL1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}

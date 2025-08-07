@@ -5,7 +5,14 @@
 			{
 				"name": "Get Metadata1",
 				"type": "GetMetadata",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Script1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -24,6 +31,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -135,7 +143,10 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
-									"sqlReaderQuery": "\r\nSELECT '@{pipeline().DataFactory}' as DataFactory_Name,\r\n'@{pipeline().Pipeline}' as Pipeline_Name,\r\n'@{pipeline().RunId}' as RunId,\r\n'@{item().name}' as Source,\r\n'@{substring(item().name,0,lastindexof(item().name,'.csv'))}' as Destination,\r\n'@{pipeline().TriggerType}' as TriggerType,\r\n'@{pipeline().TriggerId}' as TriggerId,\r\n'@{pipeline().TriggerName}' as TriggerName,\r\n'@{pipeline().TriggerTime}' as TriggerTime,\r\n'@{activity('Copy data1').output.rowsCopied}' as rowsCopied,\r\n'@{activity('Copy data1').output.rowsRead}' as RowsRead,\r\n'@{activity('Copy data1').output.usedParallelCopies}' as No_ParallelCopies,\r\n'@{activity('Copy data1').output.copyDuration}' as copyDuration_in_secs,\r\n'@{activity('Copy data1').output.effectiveIntegrationRuntime}' as effectiveIntegrationRuntime,\r\n'@{activity('Copy data1').output.executionDetails[0].source.type}' as Source_Type,\r\n'@{activity('Copy data1').output.executionDetails[0].sink.type}' as Sink_Type,\r\n'@{activity('Copy data1').output.executionDetails[0].status}' as Execution_Status,\r\n'@{activity('Copy data1').output.executionDetails[0].start}' as CopyActivity_Start_Time,\r\n'@{utcnow()}' as CopyActivity_End_Time,\r\n'@{activity('Copy data1').output.executionDetails[0].detailedDurations.queuingDuration}' as CopyActivity_queuingDuration_in_secs,\r\n'@{activity('Copy data1').output.executionDetails[0].detailedDurations.transferDuration}' as CopyActivity_transferDuration_in_secs\r\n",
+									"sqlReaderQuery": {
+										"value": "\r\nSELECT '@{pipeline().DataFactory}' as DataFactory_Name,\r\n'@{pipeline().Pipeline}' as Pipeline_Name,\r\n'@{pipeline().RunId}' as RunId,\r\n'@{item().name}' as Source,\r\n'@{substring(item().name,0,lastindexof(item().name,'.csv'))}' as Destination,\r\n'@{pipeline().TriggerType}' as TriggerType,\r\n'@{pipeline().TriggerId}' as TriggerId,\r\n'@{pipeline().TriggerName}' as TriggerName,\r\n'@{pipeline().TriggerTime}' as TriggerTime,\r\n'@{activity('Copy data1').output.rowsCopied}' as rowsCopied,\r\n'@{activity('Copy data1').output.rowsRead}' as RowsRead,\r\n'@{activity('Copy data1').output.usedParallelCopies}' as No_ParallelCopies,\r\n'@{activity('Copy data1').output.copyDuration}' as copyDuration_in_secs,\r\n'@{activity('Copy data1').output.effectiveIntegrationRuntime}' as effectiveIntegrationRuntime,\r\n'@{activity('Copy data1').output.executionDetails[0].source.type}' as Source_Type,\r\n'@{activity('Copy data1').output.executionDetails[0].sink.type}' as Sink_Type,\r\n'@{activity('Copy data1').output.executionDetails[0].status}' as Execution_Status,\r\n'@{activity('Copy data1').output.executionDetails[0].start}' as CopyActivity_Start_Time,\r\n'@{utcnow()}' as CopyActivity_End_Time,\r\n'@{activity('Copy data1').output.executionDetails[0].detailedDurations.queuingDuration}' as CopyActivity_queuingDuration_in_secs,\r\n'@{activity('Copy data1').output.executionDetails[0].detailedDurations.transferDuration}' as CopyActivity_transferDuration_in_secs\r\n",
+										"type": "Expression"
+									},
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
@@ -195,6 +206,54 @@
 				"linkedServiceName": {
 					"referenceName": "LNK_AZURE_SQL1",
 					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Script1",
+				"description": "",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "Validation1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "LNK_AZURE_SQL1",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "TRUNCATE TABLE summary\nTRUNCATE TABLE daily_recon\nTRUNCATE TABLE [dbo].[pipeline_log]\n\ntruncate table Purchasing_PurchaseOrderDetail\ntruncate table Purchasing_PurchaseOrderHeader"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			},
+			{
+				"name": "Validation1",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DelimitedText18",
+						"type": "DatasetReference"
+					},
+					"timeout": "0.12:00:00",
+					"sleep": 10
 				}
 			}
 		],

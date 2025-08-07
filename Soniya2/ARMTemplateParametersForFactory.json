@@ -1,0 +1,96 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "Soniya2"
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"LNK_ADLS_accountKey": {
+			"value": ""
+		},
+		"LNK_ADLS2_accountKey": {
+			"value": ""
+		},
+		"LNK_AZURE_SQL_password": {
+			"value": ""
+		},
+		"LNK_AZURE_SQL1_password": {
+			"value": ""
+		},
+		"Onprem_Adventureworks_password": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"lnk_SqlServer2_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "dbs-soniya-dev.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "DB-soniya-dev"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "Soniya"
+		},
+		"LNK_ADLS_properties_typeProperties_url": {
+			"value": "https://adlssoniyadev.dfs.core.windows.net/"
+		},
+		"LNK_ADLS2_properties_typeProperties_url": {
+			"value": "https://soniyastorage1.dfs.core.windows.net/"
+		},
+		"LNK_AZURE_SQL_properties_typeProperties_server": {
+			"value": "dbs-soniya-dev.database.windows.net"
+		},
+		"LNK_AZURE_SQL_properties_typeProperties_database": {
+			"value": "DB-soniya-dev"
+		},
+		"LNK_AZURE_SQL_properties_typeProperties_userName": {
+			"value": "Soniya"
+		},
+		"LNK_AZURE_SQL1_properties_typeProperties_server": {
+			"value": "db-soniyaserver2.database.windows.net"
+		},
+		"LNK_AZURE_SQL1_properties_typeProperties_database": {
+			"value": "Soniya2"
+		},
+		"LNK_AZURE_SQL1_properties_typeProperties_userName": {
+			"value": "soniya2"
+		},
+		"Linked_git_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/"
+		},
+		"Onprem_Adventureworks_properties_typeProperties_server": {
+			"value": "DESKTOP"
+		},
+		"Onprem_Adventureworks_properties_typeProperties_database": {
+			"value": "AdventureWorks2022"
+		},
+		"Onprem_Adventureworks_properties_typeProperties_userName": {
+			"value": "saa"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "DESKTOP"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "ADF_DB"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "saa"
+		},
+		"lnk_SqlServer2_properties_typeProperties_server": {
+			"value": "DESKTOP"
+		},
+		"lnk_SqlServer2_properties_typeProperties_database": {
+			"value": "ADF_DB"
+		},
+		"lnk_SqlServer2_properties_typeProperties_userName": {
+			"value": "saa"
+		}
+	}
+}

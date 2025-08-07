@@ -1,0 +1,325 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Soniya2"
+		},
+		"AzureSqlDatabase1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
+		"LNK_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LNK_ADLS'"
+		},
+		"LNK_ADLS2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LNK_ADLS2'"
+		},
+		"LNK_AZURE_SQL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LNK_AZURE_SQL'"
+		},
+		"LNK_AZURE_SQL1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LNK_AZURE_SQL1'"
+		},
+		"Onprem_Adventureworks_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Onprem_Adventureworks'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"lnk_SqlServer2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'lnk_SqlServer2'"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "dbs-soniya-dev.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "DB-soniya-dev"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Soniya"
+		},
+		"LNK_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlssoniyadev.dfs.core.windows.net/"
+		},
+		"LNK_ADLS2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://soniyastorage1.dfs.core.windows.net/"
+		},
+		"LNK_AZURE_SQL_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "dbs-soniya-dev.database.windows.net"
+		},
+		"LNK_AZURE_SQL_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "DB-soniya-dev"
+		},
+		"LNK_AZURE_SQL_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Soniya"
+		},
+		"LNK_AZURE_SQL1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "db-soniyaserver2.database.windows.net"
+		},
+		"LNK_AZURE_SQL1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Soniya2"
+		},
+		"LNK_AZURE_SQL1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "soniya2"
+		},
+		"Linked_git_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/"
+		},
+		"Onprem_Adventureworks_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP"
+		},
+		"Onprem_Adventureworks_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2022"
+		},
+		"Onprem_Adventureworks_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "saa"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "ADF_DB"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "saa"
+		},
+		"lnk_SqlServer2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP"
+		},
+		"lnk_SqlServer2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "ADF_DB"
+		},
+		"lnk_SqlServer2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "saa"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "Soniya2_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
+					"LNK_ADLS_accountKey": {
+						"value": "[parameters('LNK_ADLS_accountKey')]"
+					},
+					"LNK_ADLS2_accountKey": {
+						"value": "[parameters('LNK_ADLS2_accountKey')]"
+					},
+					"LNK_AZURE_SQL_password": {
+						"value": "[parameters('LNK_AZURE_SQL_password')]"
+					},
+					"LNK_AZURE_SQL1_password": {
+						"value": "[parameters('LNK_AZURE_SQL1_password')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"LNK_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('LNK_ADLS_properties_typeProperties_url')]"
+					},
+					"LNK_ADLS2_properties_typeProperties_url": {
+						"value": "[parameters('LNK_ADLS2_properties_typeProperties_url')]"
+					},
+					"LNK_AZURE_SQL_properties_typeProperties_server": {
+						"value": "[parameters('LNK_AZURE_SQL_properties_typeProperties_server')]"
+					},
+					"LNK_AZURE_SQL_properties_typeProperties_database": {
+						"value": "[parameters('LNK_AZURE_SQL_properties_typeProperties_database')]"
+					},
+					"LNK_AZURE_SQL_properties_typeProperties_userName": {
+						"value": "[parameters('LNK_AZURE_SQL_properties_typeProperties_userName')]"
+					},
+					"LNK_AZURE_SQL1_properties_typeProperties_server": {
+						"value": "[parameters('LNK_AZURE_SQL1_properties_typeProperties_server')]"
+					},
+					"LNK_AZURE_SQL1_properties_typeProperties_database": {
+						"value": "[parameters('LNK_AZURE_SQL1_properties_typeProperties_database')]"
+					},
+					"LNK_AZURE_SQL1_properties_typeProperties_userName": {
+						"value": "[parameters('LNK_AZURE_SQL1_properties_typeProperties_userName')]"
+					},
+					"Linked_git_properties_typeProperties_url": {
+						"value": "[parameters('Linked_git_properties_typeProperties_url')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "Soniya2_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Soniya2_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "Soniya2_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Onprem_Adventureworks_password": {
+						"value": "[parameters('Onprem_Adventureworks_password')]"
+					},
+					"lnk_SqlServer2_password": {
+						"value": "[parameters('lnk_SqlServer2_password')]"
+					},
+					"Onprem_Adventureworks_properties_typeProperties_server": {
+						"value": "[parameters('Onprem_Adventureworks_properties_typeProperties_server')]"
+					},
+					"Onprem_Adventureworks_properties_typeProperties_database": {
+						"value": "[parameters('Onprem_Adventureworks_properties_typeProperties_database')]"
+					},
+					"Onprem_Adventureworks_properties_typeProperties_userName": {
+						"value": "[parameters('Onprem_Adventureworks_properties_typeProperties_userName')]"
+					},
+					"lnk_SqlServer2_properties_typeProperties_server": {
+						"value": "[parameters('lnk_SqlServer2_properties_typeProperties_server')]"
+					},
+					"lnk_SqlServer2_properties_typeProperties_database": {
+						"value": "[parameters('lnk_SqlServer2_properties_typeProperties_database')]"
+					},
+					"lnk_SqlServer2_properties_typeProperties_userName": {
+						"value": "[parameters('lnk_SqlServer2_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Soniya2_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "Soniya2_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Soniya2_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "Soniya2_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Soniya2_ArmTemplate_3')]"
+			]
+		}
+	]
+}
